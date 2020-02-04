@@ -1,0 +1,32 @@
+{
+    "project_info": {
+        "project_number": "666174839522",
+        "firebase_url": "https://taxi-db-3d5b4.firebaseio.com",
+        "project_id": "taxi-db-3d5b4",
+        "storage_bucket": "taxi-db-3d5b4.appspot.com"
+    },
+    "client": [{
+        "client_info": {
+            "mobilesdk_app_id": "1:666174839522:android:dfcb90b69a8a99f93d5cbb",
+            "android_client_info": {
+                "package_name": "com.hydewick.taxi2"
+            }
+        },
+        "oauth_client": [{
+            "client_id": "666174839522-qbejilm9m1t18ck85ochgs3el2cc25gk.apps.googleusercontent.com",
+            "client_type": 3
+        }],
+        "api_key": [{
+            "current_key": "AIzaSyACqAfB2om1xyKFwbQw5rU-gx1dqevyfFw"
+        }],
+        "services": {
+            "appinvite_service": {
+                "other_platform_oauth_client": [{
+                    "client_id": "666174839522-qbejilm9m1t18ck85ochgs3el2cc25gk.apps.googleusercontent.com",
+                    "client_type": 3
+                }]
+            }
+        }
+    }],
+    "configuration_version": "1"
+}
