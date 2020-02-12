@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:taxi2/controllers.dart';
 import 'package:taxi2/models.dart';
 
 class LoginPage extends StatelessWidget {
@@ -54,21 +53,9 @@ class LoginPage extends StatelessWidget {
         fillColor: Color.fromRGBO(0, 0, 255, 0.1),
       ),
     );
-    void readMyUsername() async {
-      String myUsername = await MyStorage().readUsername();
-      if (myUsername != null)
-        print("Soy $myUsername");
-      else
-        print("Aún no existo...");
-    }
-
-    void saveMyUsername(String username) async {
-      String result = await MyStorage().saveUsername(username);
-      print(result);
-    }
 
     final testButton = InkWell(
-      onTap: () => readMyUsername(),
+      onTap: () => UserConfig().readMyUsername(),
       child: Center(
         heightFactor: 1.0,
         widthFactor: 1.0,
@@ -89,7 +76,7 @@ class LoginPage extends StatelessWidget {
     );
 
     final testButton2 = InkWell(
-      onTap: () => saveMyUsername(
+      onTap: () => UserConfig().saveMyUsername(
           Provider.of<Schedule>(context, listen: false).getMyUsername()),
       child: Center(
         heightFactor: 1.0,
@@ -154,12 +141,19 @@ class WelcomePage extends StatelessWidget {
             "¡Hola ${Provider.of<Schedule>(context, listen: false).userConfig.username}!")
       ],
     );
+    void onStatusButton() {
+      String myName =
+          Provider.of<Schedule>(context, listen: false).getMyUsername();
+      if (myName.toUpperCase() == "ADMIN")
+        Navigator.of(context).pushNamed("/admin");
+      else
+        print("Vete acostarte");
+    }
+
     final statusButton = ButtonBar(
       children: <Widget>[
         InkWell(
-          onTap: () => {
-            //setState(() => {buttonClient(context)})
-          },
+          onTap: () => onStatusButton(),
           child: Center(
             heightFactor: 1.0,
             widthFactor: 1.0,
@@ -195,6 +189,7 @@ class AdminPage extends StatelessWidget {
       home: Scaffold(
           //appBar: SliverAppBar(),
           //body: FutureBuilder(),
+          //bottomNavigationBar: BottomAppBar(),
           ),
     );
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'controllers.dart';
+
 class Schedule with ChangeNotifier {
   UserConfig userConfig;
 
@@ -23,14 +25,29 @@ class Schedule with ChangeNotifier {
   }
 }
 
-class UserConfig {
+class UserConfig extends HydeTesting {
   String username;
   int seats;
 
-  UserConfig(this.username);
+  UserConfig();
 
   UserConfig.testingConfig() {
     username = "HydeTesting";
     seats = 9;
+  }
+}
+
+class HydeTesting {
+  void readMyUsername() async {
+    String myUsername = await MyStorage().readUsername();
+    if (myUsername != null)
+      print("Soy $myUsername");
+    else
+      print("Aún no existo...");
+  }
+
+  void saveMyUsername(String username) async {
+    String result = await MyStorage().saveUsername(username);
+    print(result);
   }
 }
