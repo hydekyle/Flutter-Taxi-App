@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:taxi2/controllers.dart';
 import 'package:taxi2/models.dart';
 
 class LoginPage extends StatelessWidget {
@@ -30,7 +31,8 @@ class LoginPage extends StatelessWidget {
       ],
     );
     final loginInput = TextFormField(
-      initialValue: "myID",
+      initialValue:
+          Provider.of<Schedule>(context, listen: false).getMyUsername(),
       onChanged: (newValue) {
         Provider.of<Schedule>(context, listen: false).changeUsername(newValue);
       },
@@ -52,6 +54,61 @@ class LoginPage extends StatelessWidget {
         fillColor: Color.fromRGBO(0, 0, 255, 0.1),
       ),
     );
+    void readMyUsername() async {
+      String myUsername = await MyStorage().readUsername();
+      if (myUsername != null)
+        print("Soy $myUsername");
+      else
+        print("Aún no existo...");
+    }
+
+    void saveMyUsername(String username) async {
+      String result = await MyStorage().saveUsername(username);
+      print(result);
+    }
+
+    final testButton = InkWell(
+      onTap: () => readMyUsername(),
+      child: Center(
+        heightFactor: 1.0,
+        widthFactor: 1.0,
+        child: SizedBox(
+          height: 100.0,
+          width: MediaQuery.of(context).size.width / 1.15,
+          child: FittedBox(
+            fit: BoxFit.fill,
+            child: Text(
+              " Leer usuario ",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  backgroundColor: Color.fromRGBO(255, 0, 0, 1.0)),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    final testButton2 = InkWell(
+      onTap: () => saveMyUsername(
+          Provider.of<Schedule>(context, listen: false).getMyUsername()),
+      child: Center(
+        heightFactor: 1.0,
+        widthFactor: 1.0,
+        child: SizedBox(
+          height: 100.0,
+          width: MediaQuery.of(context).size.width / 1.15,
+          child: FittedBox(
+            fit: BoxFit.fill,
+            child: Text(
+              " Save usuario ",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  backgroundColor: Color.fromRGBO(255, 0, 0, 1.0)),
+            ),
+          ),
+        ),
+      ),
+    );
 
     return MaterialApp(
       title: "Login",
@@ -60,7 +117,12 @@ class LoginPage extends StatelessWidget {
           title: Text("Datos de usuario"),
         ),
         body: Column(
-          children: <Widget>[loginInput, passwordInput],
+          children: <Widget>[
+            loginInput,
+            passwordInput,
+            testButton,
+            testButton2
+          ],
         ),
         bottomNavigationBar: saveButton,
       ),
@@ -77,7 +139,6 @@ class WelcomePage extends StatelessWidget {
         IconButton(
           icon: Icon(Icons.local_taxi),
           onPressed: () {
-            Provider.of<Schedule>(context, listen: false).init();
             Navigator.of(context).pushNamed("/login");
           },
         )
@@ -85,7 +146,10 @@ class WelcomePage extends StatelessWidget {
     );
     final myBody = Column(
       children: <Widget>[
-        Image(image: AssetImage('assets/icon.png')),
+        Tooltip(
+          message: "Taxi Laguna",
+          child: Image(image: AssetImage('assets/icon.png')),
+        ),
         Text(
             "¡Hola ${Provider.of<Schedule>(context, listen: false).userConfig.username}!")
       ],
@@ -120,6 +184,19 @@ class WelcomePage extends StatelessWidget {
         title: 'Taxi Laguna',
         home: Scaffold(
             appBar: topBar, body: myBody, bottomNavigationBar: statusButton));
+  }
+}
+
+class AdminPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Visor de taxis',
+      home: Scaffold(
+          //appBar: SliverAppBar(),
+          //body: FutureBuilder(),
+          ),
+    );
   }
 }
 

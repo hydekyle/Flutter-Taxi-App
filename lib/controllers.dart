@@ -14,17 +14,25 @@ class Database {
 class MyStorage {
   final FlutterSecureStorage deviceStorage = FlutterSecureStorage();
 
-  Future readByKey(String key) {
+  Future _readByKey(String key) {
     return deviceStorage
         .read(key: key)
         .then((onValue) => onValue)
         .catchError((onError) => onError);
   }
 
-  Future saveByKey(String key, String value) {
+  Future _saveByKey(String key, String value) {
     return deviceStorage
         .write(key: key, value: value)
         .then((onValue) => onValue)
         .catchError((onError) => onError);
+  }
+
+  Future readUsername() {
+    return _readByKey("username");
+  }
+
+  Future saveUsername(String username) {
+    return _saveByKey("username", username);
   }
 }
