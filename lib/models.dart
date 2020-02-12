@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class Schedule with ChangeNotifier {
   UserConfig userConfig;
-  Color theColor;
 
   Schedule() {
     if (userConfig == null) _init();
@@ -10,9 +9,7 @@ class Schedule with ChangeNotifier {
 
   void _init() {
     print("Schedule init");
-    userConfig = UserConfig();
-    userConfig.username = "HydeTesting";
-    theColor = Colors.red;
+    userConfig = UserConfig.testingConfig();
   }
 
   void changeUsername(String newUsername) {
@@ -20,16 +17,20 @@ class Schedule with ChangeNotifier {
     notifyListeners();
   }
 
-  void changeColor(Color color) {
-    theColor = color;
-    notifyListeners();
-  }
-
   String getMyUsername() {
-    return userConfig.username == null ? "" : userConfig.username;
+    String myUsername = userConfig.username;
+    return myUsername == null ? "" : myUsername;
   }
 }
 
 class UserConfig {
   String username;
+  int seats;
+
+  UserConfig(this.username);
+
+  UserConfig.testingConfig() {
+    username = "HydeTesting";
+    seats = 9;
+  }
 }
