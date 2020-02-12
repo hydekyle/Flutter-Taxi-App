@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:taxi2/controllers.dart';
 import 'package:taxi2/models.dart';
 
 class LoginPage extends StatelessWidget {
@@ -97,6 +98,28 @@ class LoginPage extends StatelessWidget {
       ),
     );
 
+    final testButton3 = InkWell(
+      onTap: () => Provider.of<Schedule>(context, listen: false)
+          .database
+          .uploadTest(UserConfig.testingConfig()),
+      child: Center(
+        heightFactor: 1.0,
+        widthFactor: 1.0,
+        child: SizedBox(
+          height: 100.0,
+          width: MediaQuery.of(context).size.width / 1.15,
+          child: FittedBox(
+            fit: BoxFit.fill,
+            child: Text(
+              " Save usuario !",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  backgroundColor: Color.fromRGBO(255, 0, 0, 1.0)),
+            ),
+          ),
+        ),
+      ),
+    );
     return MaterialApp(
       title: "Login",
       home: Scaffold(
@@ -107,8 +130,7 @@ class LoginPage extends StatelessWidget {
           children: <Widget>[
             loginInput,
             passwordInput,
-            testButton,
-            testButton2
+            testButton3,
           ],
         ),
         bottomNavigationBar: saveButton,
@@ -187,10 +209,12 @@ class AdminPage extends StatelessWidget {
     return MaterialApp(
       title: 'Visor de taxis',
       home: Scaffold(
-          //appBar: SliverAppBar(),
-          //body: FutureBuilder(),
-          //bottomNavigationBar: BottomAppBar(),
-          ),
+        appBar: AppBar(
+          title: Text("Title"),
+        ),
+        body: Text("Vaaa"),
+        bottomNavigationBar: BottomAppBar(),
+      ),
     );
   }
 }

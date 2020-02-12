@@ -1,32 +1,40 @@
 {
-    "project_info": {
-        "project_number": "666174839522",
-        "firebase_url": "https://taxi-db-3d5b4.firebaseio.com",
-        "project_id": "taxi-db-3d5b4",
-        "storage_bucket": "taxi-db-3d5b4.appspot.com"
-    },
-    "client": [{
-        "client_info": {
-            "mobilesdk_app_id": "1:666174839522:android:dfcb90b69a8a99f93d5cbb",
-            "android_client_info": {
-                "package_name": "com.hydewick.taxi2"
-            }
-        },
-        "oauth_client": [{
-            "client_id": "666174839522-qbejilm9m1t18ck85ochgs3el2cc25gk.apps.googleusercontent.com",
-            "client_type": 3
-        }],
-        "api_key": [{
-            "current_key": "AIzaSyACqAfB2om1xyKFwbQw5rU-gx1dqevyfFw"
-        }],
-        "services": {
-            "appinvite_service": {
-                "other_platform_oauth_client": [{
-                    "client_id": "666174839522-qbejilm9m1t18ck85ochgs3el2cc25gk.apps.googleusercontent.com",
-                    "client_type": 3
-                }]
-            }
+  "project_info": {
+    "project_number": "11952598901",
+    "firebase_url": "https://taxiapp-1570825452403.firebaseio.com",
+    "project_id": "taxiapp-1570825452403",
+    "storage_bucket": "taxiapp-1570825452403.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:11952598901:android:28b10e336b87bcdd43ad3c",
+        "android_client_info": {
+          "package_name": "com.hydewick.taxi2"
         }
-    }],
-    "configuration_version": "1"
+      },
+      "oauth_client": [
+        {
+          "client_id": "11952598901-tbia4ua962q101uo6b0v5urfegqh2q73.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0Vnfx6chYpksbHvpax_rx0a4NluBAcTo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "11952598901-tbia4ua962q101uo6b0v5urfegqh2q73.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
 }

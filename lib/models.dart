@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'controllers.dart';
 
 class Schedule with ChangeNotifier {
   UserConfig userConfig;
+  Database database;
 
   Schedule() {
     if (userConfig == null) _init();
@@ -12,6 +12,7 @@ class Schedule with ChangeNotifier {
   void _init() {
     print("Schedule init");
     userConfig = UserConfig.testingConfig();
+    database = Database();
   }
 
   void changeUsername(String newUsername) {
@@ -29,11 +30,15 @@ class UserConfig extends HydeTesting {
   String username;
   int seats;
 
+  Map<String, dynamic> toMap() {
+    return {'username': username, 'seat': seats};
+  }
+
   UserConfig();
 
   UserConfig.testingConfig() {
     username = "HydeTesting";
-    seats = 9;
+    seats = 99;
   }
 }
 
