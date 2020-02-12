@@ -1,16 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'models.dart';
+import 'package:taxi2/models.dart';
 
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print("Entrando en login");
+    final saveButton = ButtonBar(
+      children: <Widget>[
+        InkWell(
+          onTap: () => Navigator.of(context).pushNamed("/welcome"),
+          child: Center(
+            heightFactor: 1.0,
+            widthFactor: 1.0,
+            child: SizedBox(
+              height: 100.0,
+              width: MediaQuery.of(context).size.width / 1.15,
+              child: FittedBox(
+                fit: BoxFit.fill,
+                child: Text(
+                  " Guardar ",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      backgroundColor: Color.fromRGBO(0, 150, 255, 0.8)),
+                ),
+              ),
+            ),
+          ),
+        )
+      ],
+    );
     final loginInput = TextFormField(
       initialValue: "myID",
       onChanged: (newValue) {
-        //inputUsername = newValue;
+        Provider.of<Schedule>(context, listen: false).changeUsername(newValue);
       },
       decoration: InputDecoration(
           labelText: 'Identificación',
@@ -32,40 +54,15 @@ class LoginPage extends StatelessWidget {
     );
 
     return MaterialApp(
-      title: 'LoginWindow',
+      title: "Login",
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Datos'),
+          title: Text("Datos de usuario"),
         ),
         body: Column(
           children: <Widget>[loginInput, passwordInput],
         ),
-        bottomNavigationBar: ButtonBar(
-          children: <Widget>[
-            InkWell(
-              onTap: () => {
-                //buttonGuardar(context)
-              },
-              child: Center(
-                heightFactor: 1.0,
-                widthFactor: 1.0,
-                child: SizedBox(
-                  height: 100.0,
-                  width: MediaQuery.of(context).size.width / 1.15,
-                  child: FittedBox(
-                    fit: BoxFit.fill,
-                    child: Text(
-                      " Guardar ",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          backgroundColor: Color.fromRGBO(0, 150, 255, 0.8)),
-                    ),
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
+        bottomNavigationBar: saveButton,
       ),
     );
   }
@@ -74,55 +71,61 @@ class LoginPage extends StatelessWidget {
 class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final topBar = AppBar(
+      title: Text('Taxi Laguna'),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.local_taxi),
+          onPressed: () {
+            Provider.of<Schedule>(context, listen: false).init();
+            Navigator.of(context).pushNamed("/login");
+          },
+        )
+      ],
+    );
+    final myBody = Column(
+      children: <Widget>[
+        Image(image: AssetImage('assets/icon.png')),
+        Text(
+            "¡Hola ${Provider.of<Schedule>(context, listen: false).userConfig.username}!")
+      ],
+    );
+    final statusButton = ButtonBar(
+      children: <Widget>[
+        InkWell(
+          onTap: () => {
+            //setState(() => {buttonClient(context)})
+          },
+          child: Center(
+            heightFactor: 1.0,
+            widthFactor: 1.0,
+            child: SizedBox(
+              height: 100.0,
+              width: MediaQuery.of(context).size.width / 1.15,
+              child: FittedBox(
+                fit: BoxFit.fill,
+                child: Text(
+                  " Ocupado/Libre ",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      backgroundColor: Color.fromRGBO(255, 0, 0, 1.0)),
+                ),
+              ),
+            ),
+          ),
+        )
+      ],
+    );
     return MaterialApp(
         title: 'Taxi Laguna',
         home: Scaffold(
-            appBar: AppBar(
-              title: Text('Taxi Laguna'),
-              actions: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.local_taxi),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed("/login");
-                  },
-                )
-              ],
-            ),
-            body: Column(
-              children: <Widget>[
-                Image(image: AssetImage('assets/icon/icon.png')),
-                Text("poner algo aqui")
-              ],
-            ),
-            bottomNavigationBar: ButtonBar(
-              children: <Widget>[
-                InkWell(
-                  onTap: () => {
-                    //setState(() => {buttonClient(context)})
-                  },
-                  child: Center(
-                    heightFactor: 1.0,
-                    widthFactor: 1.0,
-                    child: SizedBox(
-                      height: 100.0,
-                      width: MediaQuery.of(context).size.width / 1.15,
-                      child: FittedBox(
-                        fit: BoxFit.fill,
-                        child: Text(
-                          " Ocupado/Libre ",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              backgroundColor: Color.fromRGBO(255, 0, 0, 1.0)),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            )));
+            appBar: topBar, body: myBody, bottomNavigationBar: statusButton));
   }
 }
 
+// TODO REMOVE TAL
+// ! I better remove this
+// ? Sure I should
 // class MyHomePage extends StatelessWidget {
 //   @override
 //   Widget build(BuildContext context) {
