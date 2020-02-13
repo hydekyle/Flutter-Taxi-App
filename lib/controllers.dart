@@ -16,47 +16,29 @@ class Database {
             googleAppID: '1:11952598901:android:28b10e336b87bcdd43ad3c',
             apiKey: 'AIzaSyB0Vnfx6chYpksbHvpax_rx0a4NluBAcTo',
             databaseURL: 'https://taxiapp-1570825452403.firebaseio.com'));
-    print("¡configured $firebaseApp");
+    print("¡Configured $firebaseApp!");
     database = FirebaseDatabase(app: firebaseApp);
-    print("y database también: $database");
+    print("Y la database también: $database");
   }
 
   Database() {
     if (firebaseApp == null) _init();
   }
 
-  // final CollectionReference _taxisReference =
-  //     Firestore.instance.collection('users');
-
   void uploadTest(UserConfig configData) async {
-    print("por q...");
-    print(database.app);
+    print("Uploading en ${database.app}");
 
     await database
         .reference()
         .child("pinga")
-        .update({"polla": 13}).then((onValue) => print("q ha pachao"));
-
-    print("a ver si hago lo otro...");
+        .update(configData.toMap())
+        .then((onValue) => print("Updateado"));
 
     database
         .reference()
         .child("pinga")
         .once()
-        .then((onValue) => print("v $onValue"));
-    // database
-    //     .reference()
-    //     .child("users")
-    //     .once()
-    //     .then((onValue) => print("vaaaya $onValue"));
-    // await FirebaseDatabase.instance.reference().child('users').update(
-    //     {"Flutter funciona": "ok"}).then((onValue) => print("Updateado?"));
-    // await FirebaseDatabase.instance
-    //     .reference()
-    //     .child('users')
-    //     .once()
-    //     .then((onValue) => print(onValue));
-    // print("Termino!");
+        .then((onValue) => print("v ${onValue.value}"));
   }
 }
 
