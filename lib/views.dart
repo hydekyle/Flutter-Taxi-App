@@ -101,7 +101,7 @@ class LoginPage extends StatelessWidget {
     final testButton3 = InkWell(
       onTap: () => Provider.of<Schedule>(context, listen: false)
           .database
-          .uploadTest(UserConfig.testingConfig()),
+          .testButton(UserConfig.testingConfig()),
       child: Center(
         heightFactor: 1.0,
         widthFactor: 1.0,
@@ -111,7 +111,7 @@ class LoginPage extends StatelessWidget {
           child: FittedBox(
             fit: BoxFit.fill,
             child: Text(
-              " Save usuario !",
+              " ¡Test Button! ",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   backgroundColor: Color.fromRGBO(255, 0, 0, 1.0)),

@@ -4,6 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:firebase_database/firebase_database.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:taxi2/models.dart';
+import 'dart:math' as math;
 
 class Database {
   FirebaseApp firebaseApp;
@@ -25,20 +26,37 @@ class Database {
     if (firebaseApp == null) _init();
   }
 
-  void uploadTest(UserConfig configData) async {
-    print("Uploading en ${database.app}");
+  void testButton(UserConfig configData) async {
+    await uploadOne(configData);
+    readAll();
+  }
 
-    await database
-        .reference()
-        .child("pinga")
-        .update(configData.toMap())
-        .then((onValue) => print("Updateado"));
-
+  void readAll() async {
     database
         .reference()
-        .child("pinga")
+        .child("users")
         .once()
-        .then((onValue) => print("v ${onValue.value}"));
+        .then((onValue) => readSnapshot(onValue))
+        .catchError((onError) => print("Error al leer db: $onError"));
+  }
+
+  void readSnapshot(DataSnapshot snapshot) {
+    final values = snapshot.value as Map;
+    for (final key in values.keys) {
+      print("$key: ${values[key]}");
+    }
+  }
+
+  Future uploadOne(UserConfig configData) {
+    print("Uploading en ${database.app}");
+
+    final String randomName = "randy" + math.Random().nextInt(100).toString();
+
+    return database
+        .reference()
+        .child("users")
+        .update(configData.toMapTest(randomName))
+        .then((onValue) => print("Updateado"));
   }
 }
 

@@ -34,6 +34,12 @@ class UserConfig extends HydeTesting {
     return {'username': username, 'seat': seats};
   }
 
+  Map<String, dynamic> toMapTest(String id) {
+    return {
+      id: {'username': username, 'seat': seats}
+    };
+  }
+
   UserConfig();
 
   UserConfig.testingConfig() {
