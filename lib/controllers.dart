@@ -5,6 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:taxi2/models.dart';
 import 'dart:math' as math;
+import 'secrets.dart';
 
 class Database {
   FirebaseApp firebaseApp;
@@ -14,9 +15,9 @@ class Database {
     firebaseApp = await FirebaseApp.configure(
         name: "Taxi2",
         options: FirebaseOptions(
-            googleAppID: '1:11952598901:android:28b10e336b87bcdd43ad3c',
-            apiKey: 'AIzaSyB0Vnfx6chYpksbHvpax_rx0a4NluBAcTo',
-            databaseURL: 'https://taxiapp-1570825452403.firebaseio.com'));
+            googleAppID: Secrets.googleAppID,
+            apiKey: Secrets.firebaseApiKey,
+            databaseURL: Secrets.firebaseURL));
     print("¡Configured $firebaseApp!");
     database = FirebaseDatabase(app: firebaseApp);
     print("Y la database también: $database");
