@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:taxi2/controllers.dart';
 import 'package:taxi2/models.dart';
+import 'package:nima/nima_actor.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -157,7 +157,16 @@ class WelcomePage extends StatelessWidget {
       children: <Widget>[
         Tooltip(
           message: "Taxi Laguna",
-          child: Image(image: AssetImage('assets/icon.png')),
+          child: SizedBox(
+            height: 100.0,
+            width: 100.0,
+            child: NimaActor(
+              "assets/anims/nimaTest.nima",
+              alignment: Alignment.center,
+              fit: BoxFit.contain,
+              animation: "Untitled",
+            ),
+          ),
         ),
         Text(
             "¡Hola ${Provider.of<Schedule>(context, listen: false).userConfig.username}!")
