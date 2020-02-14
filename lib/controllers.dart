@@ -11,6 +11,10 @@ class Database {
   FirebaseApp firebaseApp;
   FirebaseDatabase database;
 
+  Database() {
+    if (firebaseApp == null) _init();
+  }
+
   void _init() async {
     firebaseApp = await FirebaseApp.configure(
         name: "Taxi2",
@@ -21,10 +25,6 @@ class Database {
     print("¡Configured $firebaseApp!");
     database = FirebaseDatabase(app: firebaseApp);
     print("Y la database también: $database");
-  }
-
-  Database() {
-    if (firebaseApp == null) _init();
   }
 
   void testButton(UserConfig configData) async {

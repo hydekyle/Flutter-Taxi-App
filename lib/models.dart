@@ -30,6 +30,8 @@ class UserConfig extends HydeTesting {
   String username;
   int seats;
 
+  UserConfig();
+
   Map<String, dynamic> toMap() {
     return {'username': username, 'seat': seats};
   }
@@ -39,8 +41,6 @@ class UserConfig extends HydeTesting {
       id: {'username': username, 'seat': seats}
     };
   }
-
-  UserConfig();
 
   UserConfig.testingConfig() {
     username = "HydeTesting";
@@ -59,6 +59,6 @@ class HydeTesting {
 
   void saveMyUsername(String username) async {
     String result = await MyStorage().saveUsername(username);
-    print(result);
+    print("$result saved");
   }
 }
