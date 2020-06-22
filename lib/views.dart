@@ -31,10 +31,9 @@ class LoginPage extends StatelessWidget {
       ],
     );
     final loginInput = TextFormField(
-      initialValue:
-          Provider.of<Schedule>(context, listen: false).getMyUsername(),
+      initialValue: Provider.of<Store>(context, listen: false).getMyUsername(),
       onChanged: (newValue) {
-        Provider.of<Schedule>(context, listen: false).changeUsername(newValue);
+        Provider.of<Store>(context, listen: false).changeUsername(newValue);
       },
       decoration: InputDecoration(
           labelText: 'Identificación',
@@ -78,7 +77,7 @@ class LoginPage extends StatelessWidget {
 
     final testButton2 = InkWell(
       onTap: () => UserConfig().saveMyUsername(
-          Provider.of<Schedule>(context, listen: false).getMyUsername()),
+          Provider.of<Store>(context, listen: false).getMyUsername()),
       child: Center(
         heightFactor: 1.0,
         widthFactor: 1.0,
@@ -99,7 +98,7 @@ class LoginPage extends StatelessWidget {
     );
 
     final testButton3 = InkWell(
-      onTap: () => Provider.of<Schedule>(context, listen: false)
+      onTap: () => Provider.of<Store>(context, listen: false)
           .database
           .testButton(UserConfig.testingConfig()),
       child: Center(
@@ -169,12 +168,12 @@ class WelcomePage extends StatelessWidget {
           ),
         ),
         Text(
-            "¡Hola ${Provider.of<Schedule>(context, listen: false).userConfig.username}!")
+            "¡Hola ${Provider.of<Store>(context, listen: false).userConfig.username}!")
       ],
     );
     void onStatusButton() {
       String myName =
-          Provider.of<Schedule>(context, listen: false).getMyUsername();
+          Provider.of<Store>(context, listen: false).getMyUsername();
       if (myName.toUpperCase() == "ADMIN")
         Navigator.of(context).pushNamed("/admin");
       else

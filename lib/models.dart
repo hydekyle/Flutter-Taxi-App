@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'controllers.dart';
 
-class Schedule with ChangeNotifier {
+class Store with ChangeNotifier {
   UserConfig userConfig;
   Database database;
 
-  Schedule() {
+  Store() {
     if (userConfig == null) _init();
   }
 
   void _init() {
-    print("Schedule init");
+    print("Store init");
     userConfig = UserConfig.testingConfig();
     database = Database();
   }

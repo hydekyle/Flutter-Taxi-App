@@ -7,7 +7,7 @@ import 'models.dart';
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (context) => Schedule(),
+      create: (context) => Store(),
       child: MyApp(),
     ),
   );
